@@ -1,4 +1,4 @@
-# CivicAI – Pakistan Citizen Services Assistant
+# RaahBot – Pakistan Citizen Services Assistant
 
 Production-ready, multi-agent AI platform that helps Pakistani citizens get accurate,
 up-to-date information on government services (passport, NADRA, driving license,
