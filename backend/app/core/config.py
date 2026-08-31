@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     # Chroma
     chroma_host: str = "localhost"
     chroma_port: int = 8001
+    chroma_ssl: bool = False 
     chroma_collection: str = "govropk_gov_docs"
 
     # LLM provider selection: "groq" (default, free-tier friendly) or "openai"
