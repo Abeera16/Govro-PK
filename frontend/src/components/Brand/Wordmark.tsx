@@ -10,7 +10,7 @@ const Wordmark: React.FC<{ size?: "sm" | "md" | "lg"; withTagline?: boolean }> =
     <div className={`wordmark wordmark-${size}`}>
       <Seal size={sealSize} />
       <div className="wordmark-text">
-        <span className="wordmark-name">CivicAI</span>
+        <span className="wordmark-name">GovroPK</span>
         {withTagline && <span className="wordmark-tagline">Pakistan Citizen Services</span>}
       </div>
     </div>

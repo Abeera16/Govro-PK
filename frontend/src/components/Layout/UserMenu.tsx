@@ -57,7 +57,7 @@ const UserMenu: React.FC<{ user: User; onLogout: () => void }> = ({ user, onLogo
 
       <ConfirmDialog
         open={confirmOpen}
-        title="Log out of CivicAI?"
+        title="Log out of GovroPK?"
         message="You'll need to sign in again to access your conversations and account."
         confirmLabel="Log out"
         cancelLabel="Stay signed in"

@@ -1,6 +1,6 @@
 """
 Curated list of official Pakistani government source pages to scrape and index.
-Add/remove URLs here to control what CivicAI's RAG corpus covers.
+Add/remove URLs here to control what GovroPK's RAG corpus covers.
 """
 
 GOV_SOURCES: list[dict] = [

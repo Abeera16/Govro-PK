@@ -1,5 +1,5 @@
 """
-CivicAI MCP Server.
+GovroPK MCP Server.
 
 Exposes government-service tools (web search, structured gov lookups, RAG search
 over ChromaDB) over the Model Context Protocol so any MCP-compatible client
@@ -19,7 +19,7 @@ from app.mcp.tools.rag_tool import rag_search
 from app.mcp.tools.tavily_tool import tavily_search
 
 configure_logging()
-server = Server("civicai-mcp-server")
+server = Server("govropk-mcp-server")
 
 
 @server.list_tools()
@@ -101,7 +101,7 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
 
 
 async def main() -> None:
-    logger.info("Starting CivicAI MCP server (stdio transport)")
+    logger.info("Starting GovroPK MCP server (stdio transport)")
     async with stdio_server() as (read_stream, write_stream):
         await server.run(read_stream, write_stream, server.create_initialization_options())
 

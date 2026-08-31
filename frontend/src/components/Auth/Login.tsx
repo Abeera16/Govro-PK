@@ -32,7 +32,7 @@ const Login: React.FC = () => {
       <div className="auth-card">
         <Wordmark size="lg" withTagline />
         <h1 className="auth-heading">Welcome back</h1>
-        <p className="auth-subheading">Sign in to continue your conversation with CivicAI.</p>
+        <p className="auth-subheading">Sign in to continue your conversation with GovroPK.</p>
 
         <form onSubmit={onSubmit} className="auth-form">
           <label>

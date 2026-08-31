@@ -15,7 +15,7 @@ def configure_logging() -> None:
         diagnose=settings.environment != "production",
     )
     logger.add(
-        "logs/civicai.log",
+        "logs/govropk.log",
         level="INFO",
         rotation="10 MB",
         retention="14 days",

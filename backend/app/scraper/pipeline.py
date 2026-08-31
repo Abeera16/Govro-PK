@@ -21,7 +21,7 @@ async def fetch_rendered_html(url: str) -> str:
         browser = await p.chromium.launch(headless=True, args=["--ignore-certificate-errors"])
         try:
             page = await browser.new_page(
-                user_agent="CivicAI-Bot/1.0 (+https://civicai.pk)",
+                user_agent="GovroPK-Bot/1.0 (+https://govropk.pk)",
                 ignore_https_errors=True,
             )
             await page.goto(url, timeout=REQUEST_TIMEOUT_MS, wait_until="networkidle")

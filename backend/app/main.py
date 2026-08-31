@@ -16,18 +16,18 @@ configure_langsmith()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting CivicAI backend...")
+    logger.info("Starting GovroPK backend...")
     try:
         await init_models()
         logger.info("Database models initialized")
     except Exception as exc:  # noqa: BLE001
         logger.error(f"DB init failed (will retry on first request): {exc}")
     yield
-    logger.info("Shutting down CivicAI backend...")
+    logger.info("Shutting down GovroPK backend...")
 
 
 app = FastAPI(
-    title="CivicAI API",
+    title="GovroPK API",
     description="Multi-agent AI platform for Pakistani citizen government services",
     version="1.0.0",
     lifespan=lifespan,
@@ -62,7 +62,7 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 
 @app.get("/health", tags=["health"])
 async def health():
-    return {"status": "ok", "service": "civicai-backend"}
+    return {"status": "ok", "service": "govropk-backend"}
 
 
 app.include_router(auth.router, prefix="/api")

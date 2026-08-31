@@ -9,12 +9,12 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     # Postgres
-    database_url: str = "postgresql+asyncpg://civicai:civicai_pass@localhost:5432/civicai"
+    database_url: str = "postgresql+asyncpg://govropk:govropk_pass@localhost:5432/govropk"
 
     # Chroma
     chroma_host: str = "localhost"
     chroma_port: int = 8001
-    chroma_collection: str = "civicai_gov_docs"
+    chroma_collection: str = "govropk_gov_docs"
 
     # LLM provider selection: "groq" (default, free-tier friendly) or "openai"
     llm_provider: str = "groq"
@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     # LangSmith
     langchain_tracing_v2: bool = False
     langchain_api_key: str = ""
-    langchain_project: str = "civicai"
+    langchain_project: str = "govropk"
     langchain_endpoint: str = "https://api.smith.langchain.com"
 
     # JWT

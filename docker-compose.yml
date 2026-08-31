@@ -1,25 +1,25 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: civicai_postgres
+    container_name: govropk_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-civicai}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-civicai_pass}
-      POSTGRES_DB: ${POSTGRES_DB:-civicai}
+      POSTGRES_USER: ${POSTGRES_USER:-govropk}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-govropk_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-govropk}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-civicai}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-govropk}"]
       interval: 5s
       timeout: 5s
       retries: 10
 
   chromadb:
     image: chromadb/chroma:0.5.23
-    container_name: civicai_chromadb
+    container_name: govropk_chromadb
     restart: unless-stopped
     ports:
       - "8001:8000"
@@ -33,7 +33,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: civicai_mcp_server
+    container_name: govropk_mcp_server
     restart: unless-stopped
     command: ["python", "-m", "app.mcp.server"]
     env_file: .env
@@ -50,7 +50,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: civicai_backend
+    container_name: govropk_backend
     restart: unless-stopped
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
     env_file: .env
@@ -75,7 +75,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: civicai_frontend
+    container_name: govropk_frontend
     restart: unless-stopped
     environment:
       VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000/api}

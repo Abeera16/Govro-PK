@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * CivicAI's signature mark — an abstracted verification seal (shield + check
+ * GovroPK's signature mark — an abstracted verification seal (shield + check
  * within a ringed badge). Used as the logo, browser favicon source, and the
  * assistant's chat avatar, tying the whole product to its core promise:
  * verified, citation-backed answers rather than raw model guesses.
@@ -15,7 +15,7 @@ const Seal: React.FC<{ size?: number; className?: string }> = ({ size = 32, clas
     xmlns="http://www.w3.org/2000/svg"
     className={className}
     role="img"
-    aria-label="CivicAI"
+    aria-label="GovroPK"
   >
     <circle cx="24" cy="24" r="22.5" fill="var(--seal-ring, #A9812E)" opacity="0.18" />
     <circle cx="24" cy="24" r="19" fill="var(--seal-bg, #0E4A38)" />

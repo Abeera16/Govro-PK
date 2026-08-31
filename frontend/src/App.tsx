@@ -7,7 +7,7 @@ import { useAuth } from "./context/AuthContext";
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
-  if (loading) return <div className="full-page-loader">Loading CivicAI…</div>;
+  if (loading) return <div className="full-page-loader">Loading GovroPK…</div>;
   if (!user) return <Navigate to="/login" replace />;
   return <>{children}</>;
 };
