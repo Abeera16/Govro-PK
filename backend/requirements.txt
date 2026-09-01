@@ -37,7 +37,6 @@ langchain-core==0.3.86
 langchain-community==0.3.31
 langchain-groq==0.2.5
 langchain-openai==0.2.14
-langchain-chroma==0.1.4
 langchain-text-splitters==0.3.11
 langgraph==0.2.76
 langgraph-checkpoint==2.1.2
@@ -45,7 +44,7 @@ langgraph-sdk==0.1.74
 langsmith==0.10.10
 
 # ---- Vector DB ----
-chromadb==0.5.23
+qdrant-client
 
 # ---- Local embeddings (no API key, no torch — ONNX runtime only, much
 # smaller/faster download than sentence-transformers+torch) ----

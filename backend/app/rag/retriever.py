@@ -1,17 +1,14 @@
 from app.core.logging_config import logger
 from app.models.schemas import Citation
-from app.rag.vector_store import get_vector_store
+from app.rag.vector_store import similarity_search
 
 
 async def retrieve_gov_documents(query: str, k: int = 5, category: str | None = None) -> list[dict]:
-    """Retrieve top-k chunks from ChromaDB with similarity scores + metadata for citations."""
-    store = get_vector_store()
-    filter_ = {"category": category} if category else None
-
+    """Retrieve top-k chunks from the Qdrant-backed RAG index with similarity scores + metadata."""
     try:
-        results = store.similarity_search_with_relevance_scores(query, k=k, filter=filter_)
+        results = similarity_search(query, k=k, category=category)
     except Exception as exc:  # noqa: BLE001
-        logger.error(f"Chroma retrieval failed: {exc}")
+        logger.error(f"Qdrant retrieval failed: {exc}")
         return []
 
     docs = []

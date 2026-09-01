@@ -11,10 +11,10 @@ class Settings(BaseSettings):
     # Postgres
     database_url: str = "postgresql+asyncpg://govropk:govropk_pass@localhost:5432/govropk"
 
-    # Chroma
-    chroma_host: str = "localhost"
-    chroma_port: int = 8001
-    chroma_collection: str = "govropk_gov_docs"
+    # Qdrant Cloud
+    qdrant_url: str = ""
+    qdrant_api_key: str = ""
+    qdrant_collection: str = "govropk_gov_docs"
 
     # LLM provider selection: "groq" (default, free-tier friendly) or "openai"
     llm_provider: str = "groq"
