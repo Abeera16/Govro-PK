@@ -15,6 +15,10 @@ By default this project uses **Groq** (free tier) for chat/reasoning and **FastE
 (a lightweight, ONNX-based, no-API-key embedding library — no torch/CUDA download
 required) for RAG embeddings — so you can run the whole thing without any paid API.
 
+The configured chat model is Groq-hosted `openai/gpt-oss-120b`. Keep
+`LLM_PROVIDER=groq`; the `openai/` prefix is part of the model identifier and does
+not mean that the OpenAI provider should be selected.
+
 ```bash
 cp .env.example .env
 ```
@@ -75,11 +79,11 @@ docker compose up -d
 - ChromaDB:    http://localhost:8001
 - Postgres:    localhost:5432
 
-Seed the vector DB with scraped government content:
+Seed Qdrant with the included scraped government content:
 
 ```bash
 docker compose exec backend python scripts/run_scraper.py
-docker compose exec backend python scripts/ingest_to_chroma.py
+docker compose exec backend python scripts/ingest_to_qdrant.py
 ```
 
 ## Architecture

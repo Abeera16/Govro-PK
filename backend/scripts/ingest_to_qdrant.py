@@ -1,13 +1,14 @@
 """
-Chunk and embed scraped government documents, then upsert them into ChromaDB,
+Chunk and embed scraped government documents, then upsert them into Qdrant,
 recording metadata in Postgres (GovDocument) for auditability.
 
 Usage:
-   python scripts/ingest_to_chroma.py
+    python scripts/ingest_to_qdrant.py
 """
 import asyncio
 import json
 import sys
+import uuid
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -46,7 +47,7 @@ async def ingest_document(session, doc: dict) -> None:
         {"source_url": url, "title": title, "category": category, "chunk_index": c.chunk_index}
         for c in chunks
     ]
-    ids = [f"{url}::chunk::{c.chunk_index}" for c in chunks]
+    ids = [str(uuid.uuid5(uuid.NAMESPACE_URL, f"{url}::chunk::{c.chunk_index}")) for c in chunks]
     upsert_chunks(texts=texts, metadatas=metadatas, ids=ids)
 
     if existing:

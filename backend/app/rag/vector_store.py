@@ -29,6 +29,13 @@ def get_qdrant_client() -> QdrantClient:
     else:
         logger.info(f"Connected to Qdrant collection '{collection_name}'")
 
+    for field_name in ("source_url", "category"):
+        client.create_payload_index(
+            collection_name=collection_name,
+            field_name=field_name,
+            field_schema=rest.PayloadSchemaType.KEYWORD,
+        )
+
     return client
 
 

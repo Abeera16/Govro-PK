@@ -9,7 +9,7 @@ from app.api.routes import agents, auth, chat, history
 from app.core.database import init_models
 from app.core.logging_config import configure_logging, logger
 from app.utils.tracing import configure_langsmith
-
+from app.core.config import settings
 configure_logging()
 configure_langsmith()
 
@@ -35,7 +35,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

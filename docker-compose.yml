@@ -18,6 +18,7 @@ services:
       retries: 10
 
   mcp-server:
+    profiles: ["mcp"]
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -46,10 +47,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      mcp-server:
-        condition: service_started
     ports:
-      - "8010:8000"
+      - "8000:8000"
 
   frontend:
     build:

@@ -2,7 +2,8 @@
 Central factory for chat models used by every agent node.
 
 Supports two providers, selected via settings.llm_provider:
-  - "groq"   (default): free-tier friendly, uses langchain_groq.ChatGroq
+    - "groq"   (default): uses langchain_groq.ChatGroq, including
+                                             Groq-hosted openai/gpt-oss-120b
   - "openai": uses langchain_openai.ChatOpenAI
 
 This keeps provider-specific wiring in exactly one place, so switching

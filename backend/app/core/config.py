@@ -1,4 +1,5 @@
 from functools import lru_cache
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -8,6 +9,9 @@ class Settings(BaseSettings):
     environment: str = "development"
     log_level: str = "INFO"
 
+    # CORS — comma-separated list of allowed frontend origins
+    cors_origins: list[str] = ["http://localhost:5173"]
+
     # Postgres
     database_url: str = "postgresql+asyncpg://govropk:govropk_pass@localhost:5432/govropk"
 
@@ -16,14 +20,11 @@ class Settings(BaseSettings):
     qdrant_api_key: str = ""
     qdrant_collection: str = "govropk_gov_docs"
 
-    # LLM provider selection: "groq" (default, free-tier friendly) or "openai"
+    # LLM provider selection: "groq" (default) or "openai"
     llm_provider: str = "groq"
 
     # Groq
-    # NOTE: llama-3.3-70b-versatile was deprecated/shut down by Groq on 2026-08-16.
-    # openai/gpt-oss-120b is Groq's recommended replacement (see
-    # https://console.groq.com/docs/deprecations). Override via GROQ_CHAT_MODEL
-    # env var if Groq deprecates this one too, without needing a code change.
+    # openai/gpt-oss-120b is a model served by Groq, not the OpenAI API.
     groq_api_key: str = ""
     groq_chat_model: str = "openai/gpt-oss-120b"
 
@@ -55,6 +56,13 @@ class Settings(BaseSettings):
     mcp_server_host: str = "0.0.0.0"
     mcp_server_port: int = 8765
     mcp_server_url: str = "http://localhost:8765"
+
+    @field_validator("cors_origins", mode="before")
+    @classmethod
+    def split_cors_origins(cls, v):
+        if isinstance(v, str):
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return v
 
 
 @lru_cache
