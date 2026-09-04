@@ -1,6 +1,9 @@
 from functools import lru_cache
+import json
+from typing import Annotated
+
 from pydantic import field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -9,8 +12,8 @@ class Settings(BaseSettings):
     environment: str = "development"
     log_level: str = "INFO"
 
-    # CORS — comma-separated list of allowed frontend origins
-    cors_origins: list[str] = ["http://localhost:5173"]
+    # CORS — JSON or comma-separated list of allowed frontend origins
+    cors_origins: Annotated[list[str], NoDecode] = ["http://localhost:5173"]
 
     # Postgres
     database_url: str = "postgresql+asyncpg://govropk:govropk_pass@localhost:5432/govropk"
@@ -61,7 +64,16 @@ class Settings(BaseSettings):
     @classmethod
     def split_cors_origins(cls, v):
         if isinstance(v, str):
-            return [origin.strip() for origin in v.split(",") if origin.strip()]
+            value = v.strip()
+            if not value:
+                return []
+            try:
+                decoded = json.loads(value)
+            except json.JSONDecodeError:
+                decoded = value.split(",")
+            if isinstance(decoded, list):
+                return [origin.strip() for origin in decoded if origin.strip()]
+            return [str(decoded).strip()]
         return v
 
 
