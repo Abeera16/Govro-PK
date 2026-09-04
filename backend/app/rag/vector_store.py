@@ -77,13 +77,14 @@ def similarity_search(query: str, k: int = 5, category: str | None = None) -> li
             must=[rest.FieldCondition(key="category", match=rest.MatchValue(value=category))]
         )
 
-    results = client.search(
+    response = client.query_points(
         collection_name=settings.qdrant_collection,
-        query_vector=vector,
+        query=vector,
         limit=k,
         query_filter=query_filter,
         with_payload=True,
     )
+    results = response.points
 
     docs: list[tuple[Document, float]] = []
     for item in results:
