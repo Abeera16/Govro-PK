@@ -1,5 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
 import { UserRound } from "lucide-react";
 import type { Message } from "../../types";
@@ -18,6 +20,7 @@ const MessageBubble: React.FC<{ message: Message }> = ({ message }) => {
         <div className="message-bubble">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw, rehypeSanitize]}
             components={{
               table: ({ children }) => (
                 <div className="message-table-wrap">
