@@ -1,5 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { UserRound } from "lucide-react";
 import type { Message } from "../../types";
 import Seal from "../Brand/Seal";
@@ -15,7 +16,18 @@ const MessageBubble: React.FC<{ message: Message }> = ({ message }) => {
       </div>
       <div className="message-content">
         <div className="message-bubble">
-          <ReactMarkdown>{message.content}</ReactMarkdown>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              table: ({ children }) => (
+                <div className="message-table-wrap">
+                  <table className="message-table">{children}</table>
+                </div>
+              ),
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
         </div>
         {!isUser && message.citations && message.citations.length > 0 && (
           <CitationList citations={message.citations} />

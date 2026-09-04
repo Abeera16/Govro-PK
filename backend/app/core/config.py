@@ -13,7 +13,10 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     # CORS — JSON or comma-separated list of allowed frontend origins
-    cors_origins: Annotated[list[str], NoDecode] = ["http://localhost:5173"]
+    cors_origins: Annotated[list[str], NoDecode] = [
+        "http://localhost:5173",
+        "https://govro-pk-4ipj-git-main-abeera-amir-s-projects.vercel.app",
+    ]
 
     # Postgres
     database_url: str = "postgresql+asyncpg://govropk:govropk_pass@localhost:5432/govropk"

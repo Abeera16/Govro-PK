@@ -79,6 +79,21 @@ docker compose up -d
 - ChromaDB:    http://localhost:8001
 - Postgres:    localhost:5432
 
+### Render deployment
+
+Set these environment variables on the backend service:
+
+```
+CORS_ORIGINS=https://govro-pk-4ipj-git-main-abeera-amir-s-projects.vercel.app
+```
+
+Use the exact frontend origin, without a trailing slash. Also set the frontend
+build variable to the deployed API URL, for example:
+
+```
+VITE_API_BASE_URL=https://govropk.onrender.com/api
+```
+
 Seed Qdrant with the included scraped government content:
 
 ```bash
