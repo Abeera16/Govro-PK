@@ -20,8 +20,12 @@ class Settings(BaseSettings):
     llm_provider: str = "groq"
 
     # Groq
+    # NOTE: llama-3.3-70b-versatile was deprecated/shut down by Groq on 2026-08-16.
+    # openai/gpt-oss-120b is Groq's recommended replacement (see
+    # https://console.groq.com/docs/deprecations). Override via GROQ_CHAT_MODEL
+    # env var if Groq deprecates this one too, without needing a code change.
     groq_api_key: str = ""
-    groq_chat_model: str = "llama-3.3-70b-versatile"
+    groq_chat_model: str = "openai/gpt-oss-120b"
 
     # OpenAI (optional — only used if llm_provider="openai")
     openai_api_key: str = ""
